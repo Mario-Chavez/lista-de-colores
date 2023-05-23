@@ -18,7 +18,7 @@ const CarDeColor = ({colores}) => {
                 
             </Card.Body>
             <Card.Footer className="d-flex justify-content-end ">
-                        <Button className="col-5">Enviar</Button>
+                        <Button className="col-5" variant="danger">Borrar</Button>
             </Card.Footer>
         </Card>
         
