@@ -11,26 +11,13 @@ const Formulario = () => {
     const [selectColor, setSelectColor] = useState('');
     const coloresEnLocalStorage = JSON.parse( localStorage.getItem('misColores')) || [];
     const [listadoDeColor, setListadoColor] = useState(coloresEnLocalStorage);
-    
-//  const color = [ 'Primary',
-//         'Secondary',
-//         'Success',
-//         'Danger',
-//         'Warning',
-//         'Info',
-//         'Light',
-//         'Dark',]
 
     useEffect(() => {
       localStorage.setItem("misColores",JSON.stringify(listadoDeColor))
-    // console.log("cambio el color");
     }, [listadoDeColor])
     
-    const handleSelectChange = (event) => {
-        let nuevoCol = event.target.value
-        setSelectColor( nuevoCol);
-        setListadoColor([...listadoDeColor, nuevoCol]);
-
+    const handleNuevoColor = () => {
+        setListadoColor([...listadoDeColor, selectColor]);
       }; 
 
    
@@ -51,7 +38,7 @@ const Formulario = () => {
                     </div>
                     <div className="col">
                         <Card.Text className="mt-5">
-                        <Form.Select value={selectColor} onChange={handleSelectChange}>
+                        <Form.Select  onChange={(e)=>setSelectColor(e.target.value)}>
                             <option>Sellecione un color </option>
                             <option value="primary">Azul</option>
                             <option value="secondary">Gris</option>
@@ -67,14 +54,11 @@ const Formulario = () => {
                     </div>
             </Card.Body>
              <Card.Footer className="d-flex justify-content-end ">
-                        <Button className="col-3" variant={selectColor} >Enviar</Button>
+                        <Button className="col-3" variant={selectColor} type="submit" onClick={handleNuevoColor}>Enviar</Button>
              </Card.Footer>
             </Card>
-           <section className="row">
-                <div className="col-4">
-                    <CarDeColor />
-                </div>
-                    {/* <CajaDeColor color={selectColor} /> */}
+           <section className="row justify-content-between mt-5">
+                    <CarDeColor colores ={listadoDeColor}/>
            </section>
         </section>
     );
