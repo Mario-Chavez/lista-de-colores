@@ -7,39 +7,32 @@ import CajaDeColor from "./CajaDeColor";
 
 const Formulario = () => {
     
-    const [tarea, setTarea] = useState("");
-    const datosDelLocalStorage = JSON.parse( localStorage.getItem('myTarea')) || [];
-    const [listadoTareas, setListadoTareas] = useState(datosDelLocalStorage);
+    const [selectColor, setSelectColor] = useState('');
+    const coloresEnLocalStorage = JSON.parse( localStorage.getItem('misColores')) || [];
+    const [listadoDeColor, setListadoColor] = useState(coloresEnLocalStorage);
     
- const color = [ 'Primary',
-        'Secondary',
-        'Success',
-        'Danger',
-        'Warning',
-        'Info',
-        'Light',
-        'Dark',]
+//  const color = [ 'Primary',
+//         'Secondary',
+//         'Success',
+//         'Danger',
+//         'Warning',
+//         'Info',
+//         'Light',
+//         'Dark',]
 
     useEffect(() => {
-      localStorage.setItem("myTarea",JSON.stringify(listadoTareas))
-    }, [listadoTareas])
+      localStorage.setItem("misColores",JSON.stringify(listadoDeColor))
+    // console.log("cambio el color");
+    }, [selectColor])
     
-    
-    const handlerSubmit = (e) => {
-       e.preventDefault(); 
-       !tarea == ""
-       ?
-            (setListadoTareas([...listadoTareas,tarea]),
-            setTarea(""))
-        :
-            alert("debes agregar tarea");
-    };
-    
-    const borrarTarea = (nombreTarea)=>{
-    let arregloFiltrado = listadoTareas.filter((itemTarea)=>itemTarea !== nombreTarea)
-    setListadoTareas(arregloFiltrado)
-    }
+    const handleSelectChange = (event) => {
+        let nuevoCol = event.target.value
+        setSelectColor( nuevoCol);
+        setListadoColor([...listadoDeColor, nuevoCol]);
 
+      }; 
+
+   
     return (
         <section>
                                
@@ -48,27 +41,27 @@ const Formulario = () => {
                 <Card.Title className="text-center mb-5">Administrar Colores </Card.Title>
                     <div className="row">
                     <div className="col-3">
-                    <CajaDeColor/>
+                    <CajaDeColor color={selectColor} />
                     </div>
                     <div className="col">
                         <Card.Text className="mt-5">
-                        <Form.Select aria-label="Default select example">
+                        <Form.Select value={selectColor} onChange={handleSelectChange}>
                             <option>Sellecione un color </option>
-                            <option value="Primary">Azul</option>
-                            <option value="Secondary">Gris</option>
-                            <option value="Success">Verde</option>
-                            <option value="Danger">Rojo</option>
-                            <option value="Warning">Amarillo</option>
-                            <option value="Info">Celeste</option>
-                            <option value="Light">Blanco</option>
-                            <option value="Dark">Negro</option>
+                            <option value="primary">Azul</option>
+                            <option value="secondary">Gris</option>
+                            <option value="success">Verde</option>
+                            <option value="danger">Rojo</option>
+                            <option value="warning">Amarillo</option>
+                            <option value="info">Celeste</option>
+                            <option value="light">Blanco</option>
+                            <option value="dark">Negro</option>
                         </Form.Select>
                         </Card.Text>
                     </div>
                     </div>
             </Card.Body>
              <Card.Footer className="d-flex justify-content-end ">
-                        <Button className="col-3" variant="primary">Enviar</Button>
+                        <Button className="col-3" variant={selectColor} >Enviar</Button>
              </Card.Footer>
             </Card>
            

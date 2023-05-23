@@ -1,20 +1,19 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-const CajaDeColor = ({variant}) => {
+const CajaDeColor = ({color}) => {
+    console.log("me llega el color =", color);
+
     return (
         <>
-        {[
-            'Primary',
-          ].map((variant) => (
+        
             <Card
-              bg={variant.toLowerCase()}
-              key={variant}
+              bg={color}
               style={{ width: '10rem', height:"10rem" }}
               className="mb-0"
             >
             </Card>
-          ))}
+         
         </>
     );
 };
