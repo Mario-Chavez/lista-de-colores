@@ -39,7 +39,7 @@ const Formulario = () => {
             <Card>
             <Card.Body>
                 <Card.Title className="text-center mb-5">Administrar Colores </Card.Title>
-                    <div className="row">
+                 <div className="row">
                     <div className="col-3">
                     <CajaDeColor color={selectColor} />
                     </div>
