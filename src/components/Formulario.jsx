@@ -2,6 +2,7 @@ import { Button, Card, Form } from "react-bootstrap";
 // import ListaTareas from "./ListaTareas";
 import { useEffect, useState } from "react";
 import CajaDeColor from "./CajaDeColor";
+import CarDeColor from "./CardColores";
 
 
 
@@ -23,7 +24,7 @@ const Formulario = () => {
     useEffect(() => {
       localStorage.setItem("misColores",JSON.stringify(listadoDeColor))
     // console.log("cambio el color");
-    }, [selectColor])
+    }, [listadoDeColor])
     
     const handleSelectChange = (event) => {
         let nuevoCol = event.target.value
@@ -36,12 +37,17 @@ const Formulario = () => {
     return (
         <section>
                                
-            <Card>
+            <Card className="cards">
             <Card.Body>
                 <Card.Title className="text-center mb-5">Administrar Colores </Card.Title>
                  <div className="row">
                     <div className="col-3">
-                    <CajaDeColor color={selectColor} />
+                    <Card
+                    bg={selectColor}
+                    style={{ width: '10rem', height:"10rem" }}
+                    className="mb-0"
+                    >
+                    </Card>
                     </div>
                     <div className="col">
                         <Card.Text className="mt-5">
@@ -64,7 +70,12 @@ const Formulario = () => {
                         <Button className="col-3" variant={selectColor} >Enviar</Button>
              </Card.Footer>
             </Card>
-           
+           <section className="row">
+                <div className="col-4">
+                    <CarDeColor />
+                </div>
+                    {/* <CajaDeColor color={selectColor} /> */}
+           </section>
         </section>
     );
 };
