@@ -1,6 +1,6 @@
 const URL_COLOR = import.meta.env.VITE_API_COLOR;
 
-export const obtenerProductos = async () => {
+export const obtenerColores = async () => {
     try {
         const respuesta = await fetch(URL_COLOR);
         const colores = await respuesta.json();
