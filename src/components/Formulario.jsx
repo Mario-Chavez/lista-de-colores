@@ -2,18 +2,26 @@ import { Button, Card, Form } from "react-bootstrap";
 // import ListaTareas from "./ListaTareas";
 import { useEffect, useState } from "react";
 import CarDeColor from "./CardColores";
+import { createColor, obtenerColores } from "../helpers/queries";
 
 const Formulario = () => {
     const [selectColor, setSelectColor] = useState("");
-    const coloresEnLocalStorage = JSON.parse(localStorage.getItem("misColores")) || [];
-    const [listadoDeColor, setListadoColor] = useState(coloresEnLocalStorage);
+
+    const [listadoDeColor, setListadoColor] = useState([]);
 
     useEffect(() => {
-        localStorage.setItem("misColores", JSON.stringify(listadoDeColor));
-    }, [listadoDeColor]);
+        obtenerColores().then((res) => {
+            setListadoColor(res);
+        });
+    }, []);
+    const handleColorChange = (e) => {
+        setSelectColor(e.target.value);
+    };
 
-    const handleNuevoColor = () => {
-        setListadoColor([...listadoDeColor, selectColor]);
+    const handleSubmit = () => {
+        console.log(selectColor);
+        // setListadoColor([...listadoDeColor, selectColor]);
+        // createColor
     };
 
     return (
@@ -33,9 +41,7 @@ const Formulario = () => {
                         </div>
                         <div className="col">
                             <Card.Text className="mt-5">
-                                <Form.Select
-                                    onChange={(e) => setSelectColor(e.target.value)}
-                                >
+                                <Form.Select onChange={handleColorChange}>
                                     <option>Sellecione un color </option>
                                     <option value="primary">Azul</option>
                                     <option value="secondary">Gris</option>
@@ -55,7 +61,7 @@ const Formulario = () => {
                         className="col-3"
                         variant={selectColor}
                         type="submit"
-                        onClick={handleNuevoColor}
+                        onClick={handleSubmit}
                     >
                         Enviar
                     </Button>

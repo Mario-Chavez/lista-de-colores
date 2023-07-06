@@ -10,18 +10,17 @@ export const obtenerColores = async () => {
     }
 };
 
-// export const deleteColorApi = async (id) => {
-//     try {
-//         const respuesta = await fetch(`${URL_COLOR}/${id}`, {
-//             method: "DELETE",
-//         });
-//         return respuesta;
-//         // const productos = await respuesta.json();
-//         // return productos;
-//     } catch (error) {
-//         console.log(error);
-//     }
-// };
+export const deleteColor = async (id) => {
+    try {
+        const respuesta = await fetch(`${URL_COLOR}/${id}`, {
+            method: "DELETE",
+        });
+        return respuesta;
+    } catch (error) {
+        console.log(error);
+    }
+};
+
 export const createColor = async (color) => {
     try {
         const respuesta = await fetch(URL_PRODUCTOS, {
