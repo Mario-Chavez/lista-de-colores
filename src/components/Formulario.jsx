@@ -19,9 +19,13 @@ const Formulario = () => {
     };
 
     const handleSubmit = () => {
-        console.log(selectColor);
-        // setListadoColor([...listadoDeColor, selectColor]);
-        // createColor
+        const colorNuevo = { color: selectColor };
+
+        createColor(colorNuevo).then(() => {
+            obtenerColores().then((res) => {
+                setListadoColor(res);
+            });
+        });
     };
 
     return (
@@ -68,7 +72,7 @@ const Formulario = () => {
                 </Card.Footer>
             </Card>
             <section className="row justify-content-between mt-5">
-                <CarDeColor colores={listadoDeColor} />
+                <CarDeColor colores={listadoDeColor} setListadoColor={setListadoColor} />
             </section>
         </section>
     );

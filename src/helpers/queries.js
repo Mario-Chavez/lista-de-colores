@@ -23,7 +23,7 @@ export const deleteColor = async (id) => {
 
 export const createColor = async (color) => {
     try {
-        const respuesta = await fetch(URL_PRODUCTOS, {
+        const respuesta = await fetch(URL_COLOR, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
